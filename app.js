@@ -17,8 +17,14 @@ var commentRoutes = require("./routes/comments"),
 	indexRoutes = require("./routes/index");
 
 //mongoose.connect("mongodb://localhost/yel_camp");
-var url = process.env.DATABASEURL || "mongodb+srv://billyung:12345@firstcluster-hauhe.mongodb.net/test?retryWrites=true&w=majority";
-mongoose.connect(url);
+mongoose.connect("mongodb+srv://billyung:12345@firstcluster-hauhe.mongodb.net/test?retryWrites=true&w=majority", {
+	useNewUrlParser: true,
+	useCreateIndex: true 
+}).then (() => { 
+	console.log("connected to DB!");
+}).catch(err => {
+	 console.log("ERROR!", err.message);
+});
 
 
 app.use(bodyParser.urlencoded({extended: true}));
